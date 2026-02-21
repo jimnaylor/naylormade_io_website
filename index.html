@@ -91,6 +91,10 @@
         <div class="hero-links animate-in" style="animation-delay: 0.4s">
           <a href="#advisory" class="btn-primary">Advisory Services</a>
           <a href="#development" class="btn-secondary">Development Projects</a>
+          <button class="btn-meet" id="open-modal-hero" aria-haspopup="dialog">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Let's Meet
+          </button>
         </div>
         <a href="#advisory" class="scroll-cue animate-in" style="animation-delay: 0.55s" aria-label="Scroll down">
           <span class="scroll-label">Explore</span>
@@ -119,6 +123,10 @@
           <a href="https://jimnaylor.com" target="_blank" rel="noopener noreferrer" class="text-link">
             See Jim's full background →
           </a>
+          <button class="btn-meet btn-meet-advisory" id="open-modal-advisory" aria-haspopup="dialog">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Let's Meet
+          </button>
         </div>
         <div class="section-cards">
           <div class="card animate-in-view">
@@ -227,6 +235,25 @@
     </div>
   </footer>
 
+  <!-- Booking Modal -->
+  <div id="booking-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div>
+          <p class="modal-eyebrow">NaylorMade LLC</p>
+          <h2 id="modal-title" class="modal-title">Let's Meet</h2>
+        </div>
+        <button id="close-modal" class="modal-close" aria-label="Close booking modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div id="reclaim-embed" class="modal-embed"></div>
+    </div>
+  </div>
+
   <script>
     // Dark mode
     (function () {
@@ -282,6 +309,52 @@
         }
       });
     });
+
+    // Booking modal
+    (function () {
+      const modal = document.getElementById('booking-modal');
+      const embedContainer = document.getElementById('reclaim-embed');
+      let widgetLoaded = false;
+
+      function openModal() {
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+        // Load Reclaim widget on first open so it initializes with a visible container
+        if (!widgetLoaded) {
+          const wrapper = document.createElement('div');
+          const script = document.createElement('script');
+          script.src = 'https://meet.reclaimai.com/scripts/embed-scheduling-link.0.x.x.js';
+          script.setAttribute('data-id', '6f326ad8-6cfe-433e-9a7c-b2cb7756eeeb');
+          script.setAttribute('data-redirect', 'NONE');
+          wrapper.appendChild(script);
+          embedContainer.appendChild(wrapper);
+          widgetLoaded = true;
+        }
+        // Focus the close button for accessibility
+        setTimeout(function () {
+          document.getElementById('close-modal').focus();
+        }, 50);
+      }
+
+      function closeModal() {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+      }
+
+      document.getElementById('open-modal-hero').addEventListener('click', openModal);
+      document.getElementById('open-modal-advisory').addEventListener('click', openModal);
+      document.getElementById('close-modal').addEventListener('click', closeModal);
+
+      // Close on backdrop click
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeModal();
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.hidden) closeModal();
+      });
+    })();
   </script>
 </body>
 </html>

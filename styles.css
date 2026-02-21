@@ -486,6 +486,7 @@ section {
 }
 
 .text-link {
+  display: inline-block;
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--label-primary);
@@ -778,6 +779,140 @@ footer {
 
 .footer-links a:hover {
   color: var(--label-primary);
+}
+
+/* ======================================
+   LET'S MEET BUTTON
+   ====================================== */
+
+.btn-meet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8125rem 1.75rem;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+  color: #1f1e1c;
+  background-color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.btn-meet:hover {
+  background-color: #d9a91a;
+  border-color: #d9a91a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(var(--accent-rgb), 0.4);
+}
+
+.btn-meet-advisory {
+  margin-top: 1.5rem;
+}
+
+/* ======================================
+   BOOKING MODAL
+   ====================================== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: backdropIn 0.2s ease;
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal-panel {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--sep);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: panelIn 0.25s ease;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+}
+
+.dark .modal-panel {
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.75rem 1.75rem 1.25rem;
+  border-bottom: 1px solid var(--sep);
+}
+
+.modal-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.modal-title {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.025em;
+  color: var(--label-primary);
+  line-height: 1.1;
+}
+
+.modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--sep);
+  border-radius: 8px;
+  color: var(--label-tertiary);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: var(--label-primary);
+  border-color: var(--label-quaternary);
+  background-color: var(--bg-alt);
+}
+
+.modal-embed {
+  padding: 1.5rem 1.75rem 1.75rem;
+  min-height: 400px;
 }
 
 /* ======================================
